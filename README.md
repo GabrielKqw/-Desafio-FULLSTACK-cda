@@ -1,77 +1,67 @@
-<<<<<<< HEAD
-# -Desafio-FULLSTACK-cda
-=======
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Teste Desafio Full Stack (Dashboard) - CDA
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Introdução
+Este é um projeto de teste desenvolvido para o processo seletivo na CDA, onde você terá a oportunidade de demonstrar suas habilidades no desenvolvimento full stack. O desafio consiste em criar um sistema que permite aos usuários resgatar emblemas aleatórios e visualizar os emblemas já resgatados em um dashboard.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Funcionalidades
 
-## Description
+### Autenticação de Usuário
+- O sistema oferece autenticação básica por meio de email e senha.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Dashboard do Usuário
+- Após o login, os usuários são redirecionados para um dashboard onde podem visualizar todos os emblemas que já resgataram.
 
-## Installation
+### Resgate de Emblemas
+- No dashboard, há um botão para resgatar um emblema aleatório.
 
-```bash
-$ yarn install
-```
+### Armazenamento de Emblemas
+- Os emblemas resgatados são salvos no banco de dados e associados ao usuário.
 
-## Running the app
+## Requisitos
 
-```bash
-# development
-$ yarn run start
+### Backend
+- Implementado em Node.js e NestJS.
 
-# watch mode
-$ yarn run start:dev
+### Frontend
+- Desenvolvido em ReactJS.
 
-# production mode
-$ yarn run start:prod
-```
+### Banco de Dados
+- Preferencialmente MySQL, mas pode ser outro banco de dados.
 
-## Test
+## Extra (Opcional)
 
-```bash
-# unit tests
-$ yarn run test
+### Edição de Perfil
+- Os usuários podem editar seu perfil, adicionando informações como nome e foto de perfil.
 
-# e2e tests
-$ yarn run test:e2e
+### Categorias de Emblemas
+- Implementar diferentes categorias de emblemas, como bronze, prata e ouro.
 
-# test coverage
-$ yarn run test:cov
-```
+### Documentação da API
+- Documentar os endpoints da API, utilizando, por exemplo, Swagger.
 
-## Support
+### Filtragem e Pesquisa
+- Permitir que os usuários filtrem e pesquisem emblemas em seu dashboard.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Critérios de Avaliação
 
-## Stay in touch
+### Funcionalidade
+- O sistema atende aos requisitos especificados, incluindo autenticação, resgate de emblemas e listagem de emblemas já resgatados.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Código
+- O código está bem organizado e segue as melhores práticas.
 
-## License
+### Criatividade
+- Implementações adicionais ou melhorias serão valorizadas.
 
-Nest is [MIT licensed](LICENSE).
->>>>>>> a780744 (start:project)
+## Como Copiar e Executar o Projeto
+
+1. Clone este repositório para sua máquina local.
+2. Abra a pasta `backend` e execute `npm install` para instalar as dependências.
+3. Configuração do banco de dados:
+   - Configure o banco de dados de acordo com as configurações no arquivo `.env`.
+   - Execute as migrações do banco de dados usando o comando `npm run migrate`.
+4. Inicie o servidor backend usando o comando `npm start`.
+5. Abra a pasta `frontend` e execute `npm install` para instalar as dependências.
+6. Inicie o servidor frontend usando o comando `npm start`.
+7. Acesse a aplicação no navegador usando o endereço `http://localhost:3000`.
+
