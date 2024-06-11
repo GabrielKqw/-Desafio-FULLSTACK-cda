@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,16 +8,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model User {
-  id       Int     @id @default(autoincrement())
+  id       String  @id @default(uuid())
+  name     String
+  nickname String  @unique
   email    String  @unique
   password String
-  badges   Badge[] @relation("UserBadges")
+  cpf      String  @unique
+  isAdmin  Boolean @default(false)
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
 }
 
-model Badge {
-  id       Int    @id @default(autoincrement())
-  name     String
-  imageUrl String
-  users    User[] @relation("UserBadges")
-}
