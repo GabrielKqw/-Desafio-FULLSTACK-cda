@@ -3,6 +3,7 @@ import {
   IsBoolean,
   IsNumber,
   IsString,
+  IsUrl,
   Matches,
   MaxLength,
   MinLength,
@@ -62,7 +63,11 @@ export class CreateUserDto {
     default: 'BRONZE', // Define o valor padrão como 'BRONZE'
   })
   rank: string = 'BRONZE'; // Define o valor padrão como 'BRONZE'
-
+  @IsUrl()
+  @ApiProperty({
+    description: 'Imagem de perfil',
+    example: 'https://i.pinimg.com/280x280_RS/ca/94/d0/ca94d0af95d038459ed4d6bfde48f6e7.jpg'
+  })
   profileImage?: string;
   isAdmin: boolean;
 }

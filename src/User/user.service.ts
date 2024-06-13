@@ -22,7 +22,8 @@ export class UserService {
     password: false,
     cpf: false,
     isAdmin: false,
-    rank: true, // Adicionando o campo rank
+    rank: true, 
+    profileImage: true,
   };
 
   constructor(private readonly prisma: PrismaService) {}
@@ -48,7 +49,8 @@ export class UserService {
         cpf: true,
         password: true,
         isAdmin: true,
-        rank: true, // Selecionando o campo rank
+        rank: true, 
+        profileImage: true, // Selecionando o campo profileImage
       },
     });
 
