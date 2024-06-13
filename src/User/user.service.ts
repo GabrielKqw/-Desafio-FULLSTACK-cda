@@ -22,6 +22,7 @@ export class UserService {
     password: false,
     cpf: false,
     isAdmin: false,
+    rank: true, // Adicionando o campo rank
   };
 
   constructor(private readonly prisma: PrismaService) {}
@@ -47,11 +48,12 @@ export class UserService {
         cpf: true,
         password: true,
         isAdmin: true,
+        rank: true, // Selecionando o campo rank
       },
     });
 
     if (!record) {
-      throw new NotFoundException("Registro com o Id '${id}' não encontrado.");
+      throw new NotFoundException(`Registro com o Id '${id}' não encontrado.`);
     }
 
     return record;

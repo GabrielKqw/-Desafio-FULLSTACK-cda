@@ -8,21 +8,21 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(uuid())
-  name     String
-  nickname String   @unique
-  email    String   @unique
-  password String
-  cpf      String   @unique
-  isAdmin  Boolean  @default(false)
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
-  badges   Badge[]
+  id        String   @id @default(uuid())
+  name      String
+  nickname  String   @unique
+  email     String   @unique
+  password  String
+  cpf       String   @unique
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  rank      Rank     @default(BRONZE)
+  profileImage  String?
 }
 
-model Badge {
-  id        Int      @id @default(autoincrement())
-  name      String
-  users     User[]
-  createdAt DateTime @default(now())
+enum Rank {
+  BRONZE
+  PRATA
+  GOLD
 }

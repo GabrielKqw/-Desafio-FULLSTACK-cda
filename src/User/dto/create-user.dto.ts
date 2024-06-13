@@ -56,5 +56,13 @@ export class CreateUserDto {
   })
   cpf: string;
 
+  @ApiProperty({
+    description: 'Rank do usuário',
+    example: 'BRONZE',
+    default: 'BRONZE', // Define o valor padrão como 'BRONZE'
+  })
+  rank: string = 'BRONZE'; // Define o valor padrão como 'BRONZE'
+
+  profileImage?: string;
   isAdmin: boolean;
 }

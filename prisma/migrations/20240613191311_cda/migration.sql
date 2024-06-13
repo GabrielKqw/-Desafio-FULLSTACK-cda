@@ -7,8 +7,10 @@ CREATE TABLE `User` (
     `password` VARCHAR(191) NOT NULL,
     `cpf` VARCHAR(191) NOT NULL,
     `isAdmin` BOOLEAN NOT NULL DEFAULT false,
-    `createAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updateAt` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+    `rank` ENUM('BRONZE', 'PRATA', 'GOLD') NOT NULL DEFAULT 'BRONZE',
+    `profileImage` VARCHAR(191) NULL,
 
     UNIQUE INDEX `User_nickname_key`(`nickname`),
     UNIQUE INDEX `User_email_key`(`email`),
