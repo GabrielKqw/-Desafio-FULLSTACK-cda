@@ -5,7 +5,6 @@ import {
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-// --------------- Import rotes -----------------
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -23,7 +22,7 @@ export class UserService {
     password: false,
     cpf: false,
     isAdmin: false,
-  }
+  };
 
   constructor(private readonly prisma: PrismaService) {}
 
@@ -48,9 +47,8 @@ export class UserService {
         cpf: true,
         password: true,
         isAdmin: true,
-      
       },
-     });
+    });
 
     if (!record) {
       throw new NotFoundException("Registro com o Id '${id}' não encontrado.");
@@ -65,7 +63,7 @@ export class UserService {
 
   async create(dto: CreateUserDto): Promise<User> {
     if (!cpf.isValid(dto.cpf)) {
-      throw new BadRequestException('CPF não é valido')
+      throw new BadRequestException('CPF não é valido');
     }
 
     if (dto.password != dto.confirmPassword) {
@@ -77,8 +75,8 @@ export class UserService {
     const data: User = {
       ...dto,
       password: await bcrypt.hash(dto.password, 10),
-      cpf: cpf.format(dto.cpf)
-     };
+      cpf: cpf.format(dto.cpf),
+    };
 
     return this.prisma.user.create({ data }).catch(this.handleError);
   }
@@ -88,7 +86,7 @@ export class UserService {
 
     if (dto.cpf) {
       if (!cpf.isValid(dto.cpf)) {
-        throw new BadRequestException('CPF não é valido')
+        throw new BadRequestException('CPF não é valido');
       }
     }
 
@@ -103,11 +101,11 @@ export class UserService {
     const data: Partial<User> = { ...dto };
 
     if (data.password) {
-      data.password = await bcrypt.hash(data.password, 10)
+      data.password = await bcrypt.hash(data.password, 10);
     }
 
     if (data.cpf) {
-      data.cpf = cpf.format(data.cpf)
+      data.cpf = cpf.format(data.cpf);
     }
 
     return this.prisma.user.update({
@@ -120,19 +118,19 @@ export class UserService {
   async delete(id: string) {
     await this.findById(id);
 
-    await this.prisma.user.delete({
-      where: { id },
-    }).catch(this.handleError);
+    await this.prisma.user
+      .delete({
+        where: { id },
+      })
+      .catch(this.handleError);
   }
 
   handleError(error: Error): undefined {
     const errorLines = error.message?.split('\n');
     const lastErrorLine = errorLines[errorLines.length - 1]?.trim();
-
     if (!lastErrorLine) {
       console.error(error);
     }
-
     throw new UnprocessableEntityException(
       lastErrorLine || 'Algum erro ocorreu ao executar a operação',
     );

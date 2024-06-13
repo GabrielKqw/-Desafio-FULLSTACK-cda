@@ -19,6 +19,3 @@ export class LoginDto {
   password: string;
 }
 
-// admin =
-// "nicname": "Destino_veleiro"
-// "password": "Pxl@4568#"
