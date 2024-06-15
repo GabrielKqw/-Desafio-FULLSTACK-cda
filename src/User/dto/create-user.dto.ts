@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsNumber,
+  IsOptional,
   IsString,
   IsUrl,
   Matches,
@@ -60,14 +61,23 @@ export class CreateUserDto {
   @ApiProperty({
     description: 'Rank do usuário',
     example: 'BRONZE',
-    default: 'BRONZE', // Define o valor padrão como 'BRONZE'
+    default: 'BRONZE',
   })
-  rank: string = 'BRONZE'; // Define o valor padrão como 'BRONZE'
-  @IsUrl()
+  rank: string = 'BRONZE';
+
+  @IsOptional()
+  @IsUrl({}, { message: 'profileImage must be a URL address' })
   @ApiProperty({
     description: 'Imagem de perfil',
-    example: 'https://i.pinimg.com/280x280_RS/ca/94/d0/ca94d0af95d038459ed4d6bfde48f6e7.jpg'
+    example: 'https://i.pinimg.com/280x280_RS/ca/94/d0/ca94d0af95d038459ed4d6bfde48f6e7.jpg',
+    required: false, 
   })
   profileImage?: string;
+
+  @IsBoolean()
+  @ApiProperty({
+    description: 'Se o usuário é administrador',
+    example: false,
+  })
   isAdmin: boolean;
 }
