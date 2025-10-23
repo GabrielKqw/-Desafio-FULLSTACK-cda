@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String             @id @default(uuid())
+  name             String
+  nickname         String             @unique
+  email            String             @unique
+  password         String
+  cpf              String             @unique
+  isAdmin          Boolean            @default(false)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  rank             Rank               @default(BRONZE)
+  profileImage     String?
+  userAchievements UserAchievement[]
+
+  @@map("users")
+}
+
+model Achievement {
+  id               String             @id @default(uuid())
+  name             String
+  description      String             @db.Text
+  category         AchievementCategory
+  iconUrl          String?
+  points           Int                @default(0)
+  rarity           Rarity             @default(COMMON)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  userAchievements UserAchievement[]
+
+  @@map("achievements")
+}
+
+model UserAchievement {
+  id            String      @id @default(uuid())
+  userId        String
+  achievementId String
+  claimedAt     DateTime    @default(now())
+  
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+  @@map("user_achievements")
+}
+
+enum Rank {
+  BRONZE
+  PRATA
+  GOLD
+}
+
+enum AchievementCategory {
+  BRONZE
+  PRATA
+  GOLD
+}
+
+enum Rarity {
+  COMMON
+  RARE
+  EPIC
+  LEGENDARY
+}

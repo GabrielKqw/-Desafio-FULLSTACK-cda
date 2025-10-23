@@ -1,0 +1,130 @@
+body {
+    font-family: "Roboto", sans-serif;
+    background: linear-gradient(135deg, #1c1c1c, #343434);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.responsive-card {
+    width: 90%;
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #424242;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative; /* Adicionado para posicionamento do botão rank */
+}
+
+.responsive-card p {
+    margin: 10px 0;
+    color: #eee;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Arial", sans-serif;
+    transition: color 0.3s ease;
+}
+
+.responsive-card p:hover {
+    color: #ffc107;
+}
+
+.responsive-card img {
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 5px solid #fff;
+    box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.responsive-card img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.responsive-button {
+    display: inline-block;
+    background-color: #ffc107;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+.responsive-button:hover {
+    background-color: #ffca28;
+}
+
+.responsive-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: "Arial", sans-serif;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.rank {
+    display: inline-block;
+    background-color: #f39c12;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Espaço abaixo do botão */
+    margin-top: -20px; /* Ajuste para dar espaço ao título */
+}
+
+.rank:hover {
+    background-color: #e67e22;
+}
+
+/* Regras de Mídia */
+@media (max-width: 600px) {
+    .responsive-card {
+        margin: 20px auto;
+    }
+}
+.user-profile-container {
+    flex: 1;
+  }
+  
+  .user-achievements-container {
+    flex: 1;
+  }
+  
+  .user-achievements-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-achievements-container li {
+    font-size: 1.2em;
+    margin: 10px 0;
+  }

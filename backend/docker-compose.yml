@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: cda-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: cda_user
+      POSTGRES_PASSWORD: cda_password
+      POSTGRES_DB: cda_database
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - cda-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U cda_user -d cda_database']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cda-backend
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://cda_user:cda_password@postgres:5432/cda_database
+      JWT_SECRET: your_super_secret_jwt_key_change_in_production
+      PORT: 3200
+      NODE_ENV: production
+    ports:
+      - '3200:3200'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - cda-network
+    command: >
+      sh -c "
+        npx prisma migrate deploy &&
+        npx prisma db seed &&
+        node dist/main
+      "
+
+  prisma-studio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cda-prisma-studio
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://cda_user:cda_password@postgres:5432/cda_database
+    ports:
+      - '5555:5555'
+    depends_on:
+      - postgres
+    networks:
+      - cda-network
+    command: npx prisma studio --port 5555 --hostname 0.0.0.0
+    profiles:
+      - dev
+
+networks:
+  cda-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+

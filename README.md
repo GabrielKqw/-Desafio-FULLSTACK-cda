@@ -1,67 +1,266 @@
-# Teste Desafio Full Stack (Dashboard) - CDA
+# Desafio FULLSTACK - CDA
 
-## Introdução
-Este é um projeto de teste desenvolvido para o processo seletivo na CDA, onde você terá a oportunidade de demonstrar suas habilidades no desenvolvimento full stack. O desafio consiste em criar um sistema que permite aos usuários resgatar emblemas aleatórios e visualizar os emblemas já resgatados em um dashboard.
+A full-stack application built with NestJS (backend) and React (frontend) featuring user authentication and an achievements system.
 
-## Funcionalidades
+## 📋 Table of Contents
 
-### Autenticação de Usuário
-- O sistema oferece autenticação básica por meio de email e senha.
+- [Overview](#overview)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [API Documentation](#api-documentation)
+- [Features](#features)
+- [Environment Variables](#environment-variables)
 
-### Dashboard do Usuário
-- Após o login, os usuários são redirecionados para um dashboard onde podem visualizar todos os emblemas que já resgataram.
+## 🎯 Overview
 
-### Resgate de Emblemas
-- No dashboard, há um botão para resgatar um emblema aleatório.
+This project is a full-stack application that implements a user management system with an achievements/gamification feature. Users can register, login, and claim achievements.
 
-### Armazenamento de Emblemas
-- Os emblemas resgatados são salvos no banco de dados e associados ao usuário.
-
-## Requisitos
+## 🛠 Tech Stack
 
 ### Backend
-- Implementado em Node.js e NestJS.
+- **NestJS** - Progressive Node.js framework
+- **Prisma** - Next-generation ORM
+- **PostgreSQL** - Relational database
+- **JWT** - Authentication
+- **Docker** - Containerization
+- **TypeScript** - Type-safe JavaScript
 
 ### Frontend
-- Desenvolvido em ReactJS.
+- **React** - UI library
+- **TypeScript** - Type-safe JavaScript
+- **Vite** - Build tool and dev server
+- **CSS** - Styling
 
-### Banco de Dados
-- Preferencialmente MySQL, mas pode ser outro banco de dados.
+## 📁 Project Structure
 
-## Extra (Opcional)
+```
+.
+├── backend/              # NestJS backend application
+│   ├── src/
+│   │   ├── auth/        # Authentication module
+│   │   ├── User/        # User management module
+│   │   ├── achievement/ # Achievement module
+│   │   ├── prisma/      # Prisma service and seeds
+│   │   └── common/      # Common utilities and filters
+│   ├── prisma/          # Database schema and migrations
+│   ├── Dockerfile
+│   └── docker-compose.yml
+│
+└── frontend/            # React frontend application
+    ├── src/
+    │   ├── components/  # Reusable components
+    │   ├── pages/       # Page components
+    │   ├── services/    # API services
+    │   └── utils/       # Utility functions
+    └── vite.config.ts
+```
 
-### Edição de Perfil
-- Os usuários podem editar seu perfil, adicionando informações como nome e foto de perfil.
+## ✅ Prerequisites
 
-### Categorias de Emblemas
-- Implementar diferentes categorias de emblemas, como bronze, prata e ouro.
+Before you begin, ensure you have the following installed:
 
-### Documentação da API
-- Documentar os endpoints da API, utilizando, por exemplo, Swagger.
+- **Node.js** (v16 or higher)
+- **Yarn** (v1.22 or higher)
+- **Docker** and **Docker Compose** (for running PostgreSQL)
+- **Git**
 
-### Filtragem e Pesquisa
-- Permitir que os usuários filtrem e pesquisem emblemas em seu dashboard.
+## 📦 Installation
 
-## Critérios de Avaliação
+### 1. Clone the repository
 
-### Funcionalidade
-- O sistema atende aos requisitos especificados, incluindo autenticação, resgate de emblemas e listagem de emblemas já resgatados.
+```bash
+git clone <repository-url>
+cd -Desafio-FULLSTACK-cda
+```
 
-### Código
-- O código está bem organizado e segue as melhores práticas.
+### 2. Install Backend Dependencies
 
-### Criatividade
-- Implementações adicionais ou melhorias serão valorizadas.
+```bash
+cd backend
+yarn install
+```
 
-## Como Copiar e Executar o Projeto
+### 3. Install Frontend Dependencies
 
-1. Clone este repositório para sua máquina local.
-2. Abra a pasta `backend` e execute `npm install` para instalar as dependências.
-3. Configuração do banco de dados:
-   - Configure o banco de dados de acordo com as configurações no arquivo `.env`.
-   - Execute as migrações do banco de dados usando o comando `npm run migrate`.
-4. Inicie o servidor backend usando o comando `npm start`.
-5. Abra a pasta `frontend` e execute `npm install` para instalar as dependências.
-6. Inicie o servidor frontend usando o comando `npm start`.
-7. Acesse a aplicação no navegador usando o endereço `http://localhost:3000`.
+```bash
+cd ../frontend
+yarn install
+```
+
+## 🚀 Running the Application
+
+### Backend
+
+#### 1. Start the Database
+
+```bash
+cd backend
+docker-compose up -d
+```
+
+This will start a PostgreSQL database container.
+
+#### 2. Configure Environment Variables
+
+Create a `.env` file in the `backend` directory based on `env.example`:
+
+```bash
+cp env.example .env
+```
+
+Edit the `.env` file with your configuration.
+
+#### 3. Run Database Migrations
+
+```bash
+npx prisma migrate dev
+```
+
+#### 4. Seed the Database (Optional)
+
+```bash
+npx prisma db seed
+```
+
+#### 5. Start the Backend Server
+
+```bash
+yarn start:dev
+```
+
+The backend will be running at `http://localhost:3000`
+
+### Frontend
+
+#### 1. Start the Development Server
+
+```bash
+cd frontend
+yarn dev
+```
+
+The frontend will be running at `http://localhost:5173`
+
+## 📚 API Documentation
+
+Once the backend is running, you can access the Swagger API documentation at:
+
+```
+http://localhost:3000/api
+```
+
+### Main Endpoints
+
+#### Authentication
+- `POST /auth/login` - User login
+- `POST /auth/register` - User registration
+
+#### Users
+- `GET /user` - Get all users
+- `GET /user/:id` - Get user by ID
+- `PATCH /user/:id` - Update user
+- `DELETE /user/:id` - Delete user
+
+#### Achievements
+- `GET /achievement` - Get all achievements
+- `GET /achievement/:id` - Get achievement by ID
+- `POST /achievement` - Create achievement
+- `POST /achievement/:id/claim` - Claim an achievement
+- `PATCH /achievement/:id` - Update achievement
+- `DELETE /achievement/:id` - Delete achievement
+
+## ✨ Features
+
+### Authentication System
+- User registration with email validation
+- Secure login with JWT tokens
+- Password hashing with bcrypt
+- Protected routes
+
+### User Management
+- Create, read, update, and delete users
+- User profile management
+- Role-based access control
+
+### Achievement System
+- Create and manage achievements
+- Users can claim achievements
+- Track user progress
+- Achievement categories and rewards
+
+## 🔧 Environment Variables
+
+### Backend (.env)
+
+```env
+# Database
+DATABASE_URL="postgresql://user:password@localhost:5432/dbname"
+
+# JWT
+JWT_SECRET="your-secret-key"
+JWT_EXPIRES_IN="1d"
+
+# Server
+PORT=3000
+```
+
+## 🧪 Testing
+
+### Backend Tests
+
+```bash
+cd backend
+yarn test
+```
+
+### Frontend Tests
+
+```bash
+cd frontend
+yarn test
+```
+
+## 🐳 Docker
+
+To run the entire application with Docker:
+
+```bash
+cd backend
+docker-compose up
+```
+
+## 📝 Database Schema
+
+The application uses Prisma with the following main models:
+
+- **User** - User accounts and profiles
+- **Achievement** - Available achievements
+- **UserAchievement** - Claimed achievements by users
+
+For detailed schema, see `backend/prisma/schema.prisma`
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 👥 Authors
+
+- Gabriel - [GitHub Profile]
+
+## 🙏 Acknowledgments
+
+- NestJS team for the amazing framework
+- React team for the powerful UI library
+- Prisma team for the excellent ORM
 
